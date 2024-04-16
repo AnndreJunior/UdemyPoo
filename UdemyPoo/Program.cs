@@ -4,17 +4,40 @@
     {
         Console.Clear();
 
-        double[,] matriz = new double[2, 3];
+        int ordemMatriz;
 
-        Console.WriteLine(matriz.Length);
+        Console.Write("Informe a ordem da matriz: ");
+        ordemMatriz = int.Parse(Console.ReadLine() ?? "");
 
-        // quantidade de linhas
-        Console.WriteLine(matriz.Rank);
+        int[,] matriz = new int[ordemMatriz, ordemMatriz];
 
-        // tamanho da primeira dimensão (linhas)
-        Console.WriteLine(matriz.GetLength(0));
+        for (var i = 0; i < ordemMatriz; i++)
+        {
+            var input = Console.ReadLine() ?? "";
+            string[] valores = input.Split(' ');
 
-        // tamanho da segunda dimensão (colunas)
-        Console.WriteLine(matriz.GetLength(1));
+            for (var y = 0; y < ordemMatriz; y++)
+            {
+                matriz[i, y] = int.Parse(valores[y]);
+            }
+        }
+
+        Console.WriteLine("Main diagonal:");
+
+        for (var i = 0; i < ordemMatriz; i++)
+            Console.Write(matriz[i, i] + " ");
+        Console.WriteLine("");
+
+        int count = 0;
+        for (var i = 0; i < ordemMatriz; i++)
+        {
+            for (var y = 0; y < ordemMatriz; y++)
+            {
+                if (matriz[i, y] < 0)
+                    count++;
+            }
+        }
+
+        Console.WriteLine($"Negative number: {count}");
     }
 }
