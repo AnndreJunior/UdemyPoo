@@ -1,30 +1,46 @@
-﻿using UdemyPoo;
-
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
         Console.Clear();
 
-        /*
-        ambas as variáveis recebem o valor da soma retornado pelo método Sum
-        não há sobrecarga de métodos, mas apenas um método que recebe um array de números
-        usando o modificador de parâmetros (params) não é necessário passar uma instância de um array de números(new int[] { values })
-        */
-        var value1 = new Calculator().Sum(3, 5);
-        var value2 = new Calculator().Sum(3, 5, 7);
+        var lista = new List<string>
+        {
+            "sla",
+            "sim"
+        };
 
-        Console.WriteLine(value1);
-        Console.WriteLine(value2);
+        var users = new List<User>
+        {
+            new("André", 17),
+            new("Rian", 15)
+        };
 
-        /*
-        aqui é necessário passar um array como parâmetro
-        dependendo da versão do C#/.net será necessário passar uma instância (new int[] { 3, 5, 7 })
-        */
-        var value3 = new Calculator().Sum2([3, 5]);
-        var value4 = new Calculator().Sum2([3, 5, 7]);
+        var algo = lista.FindAll(x => x[0] == 's');
 
-        Console.WriteLine(value3);
-        Console.WriteLine(value4);
+        Console.WriteLine(algo[0]);
+
+        foreach (var i in lista)
+            Console.WriteLine(i);
+
+        var andre = users.Find(user => user.Name == "André");
+
+        Console.WriteLine(andre?.Name);
+        Console.WriteLine(andre?.Age);
+
+        foreach (var user in users)
+            Console.WriteLine($"Nome: {user.Name}, idade: {user.Age}");
+    }
+}
+
+class User
+{
+    public string Name { get; private set; }
+    public int Age { get; private set; }
+
+    public User(string name, int age)
+    {
+        Name = name;
+        Age = age; ;
     }
 }
